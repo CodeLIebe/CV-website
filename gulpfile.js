@@ -1,13 +1,14 @@
 'use strict';
 
+var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var csso = require('gulp-csso');
-var gulp = require('gulp');
 var htmlmin = require('gulp-htmlmin');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var imagemin = require('gulp-imagemin')
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
@@ -61,6 +62,13 @@ gulp.task('html', function() {
       removeComments: true
     }))
     .pipe(gulp.dest('./'));
+});
+
+//Gulp task to minify img files
+gulp.task('img', function() {
+  return gulp.src(['./img/**/*'])
+  .pipe(imagemin())
+  .pipe(gulp.dest('./img/min/'))
 });
 
 // Gulp task to minify all files
